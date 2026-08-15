@@ -1,1 +1,12 @@
 node_modules
+
+.vercel
+.env*
+!.env.example
+.next/
+data/*.db
+data/*.db-*
+*.tsbuildinfo
+.dev-*.log
+.DS_Store
+__MACOSX/

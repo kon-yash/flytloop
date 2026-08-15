@@ -1,5 +1,8 @@
 import Database from 'better-sqlite3'; import fs from 'node:fs'; import path from 'node:path';
-const databasePath = path.join(process.cwd(), 'data', 'flytloop.db'); let connection: Database.Database | undefined;
+const databasePath = process.env.VERCEL
+  ? path.join('/tmp', 'flytloop.db')
+  : path.join(process.cwd(), 'data', 'flytloop.db');
+let connection: Database.Database | undefined;
 export function db() { if (connection) return connection; fs.mkdirSync(path.dirname(databasePath), { recursive: true }); connection = new Database(databasePath); connection.pragma('journal_mode = WAL'); connection.pragma('foreign_keys = ON'); initialize(connection); return connection; }
 function initialize(d: Database.Database) { d.exec(`
 CREATE TABLE IF NOT EXISTS accounts (id TEXT PRIMARY KEY, name TEXT NOT NULL, normalized_name TEXT UNIQUE NOT NULL, industry TEXT, region TEXT, tier TEXT, health TEXT, arr REAL DEFAULT 0, owner TEXT, source_file TEXT NOT NULL, source_imported_at TEXT NOT NULL, source_checksum TEXT, source_removed INTEGER DEFAULT 0);
