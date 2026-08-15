@@ -1,0 +1,1 @@
+import{z}from'zod';import{closeFeedback}from'@/lib/ai/provider';import{json,apiError}from'@/lib/api';const Input=z.object({text:z.string().min(3)});export async function POST(r:Request){try{return json(closeFeedback(Input.parse(await r.json()).text))}catch(e){return apiError(e)}}

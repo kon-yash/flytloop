@@ -1,0 +1,1 @@
+import { accountDetail } from '@/lib/services/data';import { json,apiError } from '@/lib/api';export const dynamic='force-dynamic';export async function GET(_:Request,{params}:{params:Promise<{id:string}>}){try{const {id}=await params,account=accountDetail(id);return account?json(account):json({error:'Account not found'},404)}catch(e){return apiError(e)}}

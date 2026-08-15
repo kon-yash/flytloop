@@ -1,0 +1,3 @@
+import { markdownTable } from './markdown'; import { toMoney, normalize } from '../shared';
+export type ImportedAccount = { sourceId:string; name:string; normalizedName:string; industry:string; region:string; tier:string; health:string; arr:number; owner:string; devices:string[] };
+export function parseAccounts(markdown: string): ImportedAccount[] { return markdownTable(markdown).map((r) => ({ sourceId:r.ID, name:r.Name, normalizedName:normalize(r.Name), industry:r.Industry, region:r.Region, tier:r.Tier, health:r.Health, arr:toMoney(r.ARR), owner:r.Owner, devices:r.Devices.split(',').map((x) => x.trim()).filter(Boolean) })); }

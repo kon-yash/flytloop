@@ -1,0 +1,1 @@
+import{datasetStatus}from'@/lib/services/data';import{json,apiError}from'@/lib/api';export const dynamic='force-dynamic';export function GET(){try{return json(datasetStatus())}catch(e){return apiError(e)}}

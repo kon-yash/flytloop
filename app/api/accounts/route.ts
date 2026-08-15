@@ -1,0 +1,1 @@
+import { db } from '@/lib/db';import { ensureImported } from '@/lib/import/importAll';import { json,apiError } from '@/lib/api';export const dynamic='force-dynamic';export function GET(){try{ensureImported();return json(db().prepare('SELECT * FROM accounts WHERE source_removed=0 ORDER BY name').all())}catch(e){return apiError(e)}}

@@ -1,0 +1,1 @@
+import{z}from'zod';import{triage}from'@/lib/ai/provider';import{json,apiError}from'@/lib/api';const Input=z.object({rawText:z.string().min(5).max(10000)});export async function POST(r:Request){try{return json(await triage(Input.parse(await r.json()).rawText))}catch(e){return apiError(e)}}

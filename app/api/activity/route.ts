@@ -1,0 +1,1 @@
+import{db}from'@/lib/db';import{json,apiError}from'@/lib/api';export const dynamic='force-dynamic';export function GET(){try{return json(db().prepare('SELECT * FROM activity_logs ORDER BY created_at DESC LIMIT 100').all())}catch(e){return apiError(e)}}

@@ -1,0 +1,1 @@
+import { ZodError } from 'zod'; export const json=(data:unknown,status=200)=>Response.json(data,{status}); export const apiError=(error:unknown)=>json({error:error instanceof ZodError?'Invalid request':error instanceof Error?error.message:'Unexpected server error'},400);

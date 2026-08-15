@@ -1,0 +1,3 @@
+import { markdownTable } from './markdown'; import { sourceKey, toMoney } from '../shared';
+export type ImportedFeature = { sourceKey:string; title:string; productArea:string; sourceStatus:string; accountNames:string[]; mentions:number; revenue:number };
+export function parseFeatureRequests(markdown: string): ImportedFeature[] { return markdownTable(markdown).map((r) => ({ sourceKey:sourceKey(r.Title), title:r.Title, productArea:r['Product Area'], sourceStatus:r.Status, accountNames:r['Accounts Requesting'].split(',').map((x) => x.trim()).filter(Boolean), mentions:Number(r.Mentions)||0, revenue:toMoney(r['Est. Revenue Impact']) })); }
